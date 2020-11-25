@@ -23,8 +23,8 @@ to_timestamp(CAST(\"created\" as bigint)/1000) fec_llegada, date(jb.\"createdAt\
 jb.\"ScheduleId\", jb.\"StoreId\" ,st.client NomCliente, st.phone TelCliente, round(mts.mtsp,2)
 	FROM drive_app.\"Jobs\" jb 
 	join drive_app.\"Stores\" st on jb.\"StoreId\" = st.id
-	join drive_app.\"VwMtsPintados\" mts on mts.id = jb.id
-where jb.completed = 'TRUE' and jb.accepted is not null
+	left join drive_app.\"VwMtsPintados\" mts on mts.id = jb.id
+where jb.accepted is not null
 AND st.\"code\" = '".$id."'" ;
 }
 //echo $sql;
